@@ -214,7 +214,7 @@ julienrf/endpoints
 <p>This algebra provides vocabulary to define JSON schemas of data types.</p>
 <pre class="prettyprint"><code class="language-scala">&quot;org.julienrf&quot; %% &quot;endpoints-algebra-json-schema&quot; % &quot;0.15.0&quot;
 </code></pre>
-<p><a href="api/endpoints/algebra/JsonSchemas.html">API documentation</a></p><div class="callout note "><div class="callout-title">Note</div>
+<p><a href="../api/endpoints/algebra/JsonSchemas.html">API documentation</a></p><div class="callout note "><div class="callout-title">Note</div>
 <p>This module is dependency-free, it can be used independently of <em>endpoints</em> to define JSON schemas and interpret them as actual encoder, decoders or documentation.</p></div>
 <p>The algebra introduces the concept of <code>JsonSchema[A]</code>: a JSON schema for a type <code>A</code>.</p>
 <h3><a href="#basic-types-and-record-types" name="basic-types-and-record-types" class="anchor"><span class="anchor-link"></span></a>Basic types and record types</h3>
@@ -326,11 +326,12 @@ val recursiveSchema: Record[Recursive] = (
   &quot;example&quot;: { &quot;width&quot;: 10, &quot;height&quot;: 20 }
 }
 </code></pre>
+<p>The encoding of sealed traits in OpenAPI can be configured by overriding the <code>coproductEncoding</code> method in the OpenAPI interpreter. By default, the OpenAPI interpreter will encode variants of sealed traits in the same way that they would be encoded if they were standalone records. However, it is sometimes useful to include in each variants&rsquo; schema a reference to the base type schema. The <a href="../api/endpoints/openapi/JsonSchemas/coproductEncoding.html">API documentation</a> has more details.</p>
 <h2><a href="#generic-derivation-of-json-schemas-based-on-shapeless-" name="generic-derivation-of-json-schemas-based-on-shapeless-" class="anchor"><span class="anchor-link"></span></a>Generic derivation of JSON schemas (based on Shapeless)</h2>
 <p>The module presented in this section uses Shapeless to generically derive JSON schemas for algebraic data type definitions (sealed traits and case classes).</p>
 <pre class="prettyprint"><code class="language-scala">&quot;org.julienrf&quot; %% &quot;endpoints-json-schema-generic&quot; % &quot;0.15.0&quot;
 </code></pre>
-<p><a href="api/endpoints/generic/JsonSchemas.html">API documentation</a></p>
+<p><a href="../api/endpoints/generic/JsonSchemas.html">API documentation</a></p>
 <h3><a href="#json-schemas-derivation" name="json-schemas-derivation" class="anchor"><span class="anchor-link"></span></a>JSON schemas derivation</h3>
 <p>With this module, defining the JSON schema of the <code>Shape</code> data type is reduced to the following:</p>
 <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0/json-schema/json-schema-generic/src/test/scala/endpoints/generic/JsonSchemasDocs.scala#L10" target="_blank" title="Go to snippet source"></a><code class="language-scala">implicit val shapeSchema: JsonSchema[Shape] = genericJsonSchema</code></pre>
@@ -340,12 +341,14 @@ val recursiveSchema: Record[Recursive] = (
   <li>the schema of a sealed trait is the alternative of its leaf case  class schemas, discriminated by the case class names,</li>
   <li>each case class field has a corresponding required JSON object property of  the same name and type (for instance, the generic schema for the <code>Rectangle</code>  type has a <code>width</code> required property of type <code>integer</code>),</li>
   <li>each case class field of type <code>Option[A]</code> for some type <code>A</code> has a corresponding  optional JSON object property of the same name and type,</li>
-  <li>documentation specific to case class fields can be defined by annotating the fields  with the <code>@docs</code> annotation,</li>
+  <li>descriptions can be set for case class fields, case classes, or sealed traits  by annotating these things with the <code>@docs</code> annotation,</li>
   <li>for sealed traits, the discriminator field name can be defined by the <code>@discriminator</code>  annotation, otherwise the <code>defaultDiscriminatorName</code> value is used,</li>
   <li>the schema is named by the <code>@name</code> annotation, if present, or by invoking the  <code>classTagToSchemaName</code> operation with the <code>ClassTag</code> of the type for which the schema  is derived.</li>
+  <li>the schema title is set with the <code>@title</code> annotation, if present</li>
 </ul>
 <p>Here is an example that illustrates how to configure the generic schema derivation process:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0/json-schema/json-schema-generic/src/test/scala/endpoints/generic/JsonSchemasDocs.scala#L24-L35" target="_blank" title="Go to snippet source"></a><code class="language-scala">@discriminator(&quot;kind&quot;)
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0/json-schema/json-schema-generic/src/test/scala/endpoints/generic/JsonSchemasDocs.scala#L24-L37" target="_blank" title="Go to snippet source"></a><code class="language-scala">@discriminator(&quot;kind&quot;)
+@title(&quot;Geometric shape&quot;)
 @name(&quot;ShapeSchema&quot;)
 sealed trait Shape
 
@@ -353,6 +356,7 @@ sealed trait Shape
 case class Circle(radius: Double) extends Shape
 
 @name(&quot;RectangleSchema&quot;)
+@docs(&quot;A quadrilateral with four right angles&quot;)
 case class Rectangle(
     @docs(&quot;Rectangle width&quot;) width: Double,
     height: Double
