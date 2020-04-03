@@ -181,7 +181,7 @@ julienrf/endpoints
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.15.0+13-a6a7451e+20200403-2052
+<i class="md-icon" title="Version">label_outline</i> 0.15.0
 </label>
 </li>
 </ul>
@@ -213,7 +213,7 @@ julienrf/endpoints
 <p>You have seen in the <a href="quick-start.html">quick start</a> page that using the <em>endpoints</em> library consists in first defining abstract <strong>descriptions</strong> of HTTP endpoints, and then producing clients, servers, or documentation, by <strong>interpreting</strong> these descriptions. This page takes a step back to explain the underlying architecture of the library, and then provides some guidelines to embrace this design.</p>
 <h2><a href="#descriptions-and-interpretations" name="descriptions-and-interpretations" class="anchor"><span class="anchor-link"></span></a>Descriptions and Interpretations</h2>
 <p>Here is an example of endpoint description:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/examples/quickstart/endpoints/src/main/scala/quickstart/CounterEndpoints.scala#L5-L50" target="_blank" title="Go to snippet source"></a><code class="language-scala">import endpoints.{algebra, generic}
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/0.15.0/documentation/examples/quickstart/endpoints/src/main/scala/quickstart/CounterEndpoints.scala#L5-L50" target="_blank" title="Go to snippet source"></a><code class="language-scala">import endpoints.{algebra, generic}
 
 trait CounterEndpoints
     extends algebra.Endpoints
@@ -224,8 +224,8 @@ trait CounterEndpoints
     endpoint(get(path / &quot;current-value&quot;), ok(jsonResponse[Counter]))
 
 }</code></pre>
-<p>Endpoint descriptions are defined in terms of operations (e.g., <code>endpoint</code>, <code>get</code>, <code>path</code>, <code>ok</code>, etc.) provided by traits living in the <a href="/endpoints/api/endpoints/algebra/index.html"><code>endpoints.algebra</code> package</a>. These operations are all <strong>abstract</strong>. Furthermore, their return <strong>types</strong> are also abstract. Their purpose is only to define the <strong>rules</strong> for constructing and combining parts of HTTP endpoint descriptions. This is why they are called “algebra interfaces”, or just <strong>algebras</strong>.</p>
-<p>For instance, consider the following truncated version of the <a href="/endpoints/api/endpoints/algebra/Endpoints.html"><code>Endpoints</code> algebra</a>:</p>
+<p>Endpoint descriptions are defined in terms of operations (e.g., <code>endpoint</code>, <code>get</code>, <code>path</code>, <code>ok</code>, etc.) provided by traits living in the <a href="api/endpoints/algebra/index.html"><code>endpoints.algebra</code> package</a>. These operations are all <strong>abstract</strong>. Furthermore, their return <strong>types</strong> are also abstract. Their purpose is only to define the <strong>rules</strong> for constructing and combining parts of HTTP endpoint descriptions. This is why they are called “algebra interfaces”, or just <strong>algebras</strong>.</p>
+<p>For instance, consider the following truncated version of the <a href="api/endpoints/algebra/Endpoints.html"><code>Endpoints</code> algebra</a>:</p>
 <pre class="prettyprint"><code class="language-scala">package endpoints.algebra
 
 trait Endpoints {
@@ -257,7 +257,7 @@ trait Endpoints extends endpoints.algebra.Endpoints {
 }
 </code></pre>
 <p>The aim of the <code>endpoints.play.server.Endpoints</code> trait is to provide a Play router for a given set of HTTP endpoints. So, a <code>Request[A]</code> is a function that checks if an incoming request matches this endpoint, and in such a case it returns a <code>BodyParser[A]</code> that decodes a value of type <code>A</code> from the request.</p>
-<p>As you can see, each interpreter brings its own <strong>concrete semantic type</strong> for <code>Request[A]</code>. Client interpreters typically fix the <code>Request[A]</code> type to a function that <em>takes</em> an <code>A</code> as parameter. Conversely, server interpreters typically fix the <code>Request[A]</code> type to a function that <em>returns</em> an <code>A</code>. Can you guess what documentation interpreters do with this type parameter <code>A</code>? You can see the answer <a href="/endpoints/api/endpoints/openapi/Requests.html#Request[A]=Requests.this.DocumentedRequest">here</a>. It is discarded because this type <code>A</code> models the information that is carried by an actual request, at run-time, but the documentation is static (so, there is no <code>A</code> value to deal with).</p><div class="callout note "><div class="callout-title">Note</div>
+<p>As you can see, each interpreter brings its own <strong>concrete semantic type</strong> for <code>Request[A]</code>. Client interpreters typically fix the <code>Request[A]</code> type to a function that <em>takes</em> an <code>A</code> as parameter. Conversely, server interpreters typically fix the <code>Request[A]</code> type to a function that <em>returns</em> an <code>A</code>. Can you guess what documentation interpreters do with this type parameter <code>A</code>? You can see the answer <a href="api/endpoints/openapi/Requests.html#Request[A]=Requests.this.DocumentedRequest">here</a>. It is discarded because this type <code>A</code> models the information that is carried by an actual request, at run-time, but the documentation is static (so, there is no <code>A</code> value to deal with).</p><div class="callout note "><div class="callout-title">Note</div>
 <p>This technique has been described in details by Bruno C. d. S. Oliveira <em>et al.</em> [1]. Note that we use a variant discovered by Christian Hofer <em>et al.</em> [2], which uses type members rather than type parameters.</p></div>
 <h3><a href="#summary" name="summary" class="anchor"><span class="anchor-link"></span></a>Summary</h3>
 <p><strong>Algebras</strong> are traits that provide abstract type members and methods defining how to <strong>construct</strong> and <strong>combine</strong> endpoint descriptions.</p>
@@ -283,13 +283,13 @@ trait Endpoints extends endpoints.algebra.Endpoints {
 </ul>
 </div>
 <div>
-<a href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/manual/src/paradox/design.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/julienrf/endpoints/tree/0.15.0/documentation/manual/src/paradox/design.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.15.0+13-a6a7451e+20200403-2052
+0.15.0
 </span>
 </div>
 </article>

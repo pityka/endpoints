@@ -172,7 +172,7 @@ julienrf/endpoints
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.15.0+13-a6a7451e+20200403-2052
+<i class="md-icon" title="Version">label_outline</i> 0.15.0
 </label>
 </li>
 </ul>
@@ -184,26 +184,26 @@ julienrf/endpoints
 <div class="md-content__searchable">
 <h1><a href="#assets" name="assets" class="anchor"><span class="anchor-link"></span></a>Assets</h1>
 <p>This algebra provides vocabulary to define endpoints serving static assets.</p>
-<pre class="prettyprint"><code class="language-scala">&quot;org.julienrf&quot; %% &quot;endpoints-algebra&quot; % &quot;0.15.0+13-a6a7451e+20200403-2052&quot;
+<pre class="prettyprint"><code class="language-scala">&quot;org.julienrf&quot; %% &quot;endpoints-algebra&quot; % &quot;0.15.0&quot;
 </code></pre>
-<p><a href="/endpoints/api/endpoints/algebra/Assets.html">API documentation</a></p>
+<p><a href="../api/endpoints/algebra/Assets.html">API documentation</a></p>
 <p>The module enriches the <code>Endpoints</code> algebra with new constructors for endpoints and path segments. It also introduces the concepts of <code>AssetRequest</code>, <code>AssetResponse</code> and <code>AssetPath</code>. The typical usage looks like the following:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/algebras/algebra/src/test/scala/endpoints/algebra/AssetsDocs.scala#L6-L7" target="_blank" title="Go to snippet source"></a><code class="language-scala">val assets: Endpoint[AssetRequest, AssetResponse] =
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/0.15.0/algebras/algebra/src/test/scala/endpoints/algebra/AssetsDocs.scala#L6-L7" target="_blank" title="Go to snippet source"></a><code class="language-scala">val assets: Endpoint[AssetRequest, AssetResponse] =
   assetsEndpoint(path / &quot;assets&quot; / assetSegments())</code></pre>
 <p>The <code>assetsSegments</code> method defines a path containing (possibly) multiple segments.</p>
 <p>The concrete instantiation of the <code>AssetRequest</code> and <code>AssetResponse</code> types is left to interpreters. Typically, <code>AssetResponse</code> is mapped to binary data. Interpreters also have to provide a constructor for <code>AssetRequest</code>, so that the endpoint can be called. Typically, such constructors take the path of the asset as a <code>String</code> parameter.</p>
 <p>Server interpreters are encouraged to leverage caching HTTP headers such as <code>ETag</code> or <code>Cache-Control</code>, and gzip content encoding. Incidentally, the algebra provides an abstract <code>digest: Map[String, String]</code> member to be overridden by users with digests uniquely identifying the assets:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/algebras/algebra/src/test/scala/endpoints/algebra/AssetsDocs.scala#L11" target="_blank" title="Go to snippet source"></a><code class="language-scala">val digests = Map(&quot;main.css&quot; -&gt; &quot;2018-10-09T14:32:12Z&quot;)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/0.15.0/algebras/algebra/src/test/scala/endpoints/algebra/AssetsDocs.scala#L11" target="_blank" title="Go to snippet source"></a><code class="language-scala">val digests = Map(&quot;main.css&quot; -&gt; &quot;2018-10-09T14:32:12Z&quot;)</code></pre>
 <p>The content of the digests can be included to the asset segments so that servers know that the requested version of the asset matches the one it uses, enabling servers to indefinitely cache the asset.</p>
 </div>
 <div>
-<a href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/manual/src/paradox/algebras/assets.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/julienrf/endpoints/tree/0.15.0/documentation/manual/src/paradox/algebras/assets.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.15.0+13-a6a7451e+20200403-2052
+0.15.0
 </span>
 </div>
 </article>

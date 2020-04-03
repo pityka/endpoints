@@ -172,7 +172,7 @@ julienrf/endpoints
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.15.0+13-a6a7451e+20200403-2052
+<i class="md-icon" title="Version">label_outline</i> 0.15.0
 </label>
 </li>
 </ul>
@@ -184,15 +184,15 @@ julienrf/endpoints
 <div class="md-content__searchable">
 <h1><a href="#multiplexed-endpoints" name="multiplexed-endpoints" class="anchor"><span class="anchor-link"></span></a>Multiplexed Endpoints</h1>
 <p>This algebra provides vocabulary to define endpoints multiplexing several requests and responses.</p>
-<pre class="prettyprint"><code class="language-scala">&quot;org.julienrf&quot; %% &quot;endpoints-algebra&quot; % &quot;0.15.0+13-a6a7451e+20200403-2052&quot;
+<pre class="prettyprint"><code class="language-scala">&quot;org.julienrf&quot; %% &quot;endpoints-algebra&quot; % &quot;0.15.0&quot;
 </code></pre>
-<p><a href="/endpoints/api/endpoints/algebra/MuxEndpoints.html">API documentation</a></p>
+<p><a href="../api/endpoints/algebra/MuxEndpoints.html">API documentation</a></p>
 <p>In general, each possible resource or action supported by a service is exposed through a specific endpoint, taking a specific request type and a specific response type.</p>
 <p>However, in some cases it is useful to use a same endpoint to manage several resources or actions. We call them <em>multiplexed</em> endpoints.</p>
 <p>The algebra enriches the <code>Endpoints</code> algebra with the concept of <code>MuxEndpoint[Req, Resp, Transport]</code>, defining a multiplexed endpoint with a request containing a type <code>Req</code>, a response of type <code>Resp</code>, and serializing data to and from the <code>Transport</code> type.</p>
 <p>For instance, the type <code>MuxEndpoint[Command, Event, Json]</code> defines and endpoint whose requests contain <code>Command</code> values, whose responses contain <code>Event</code> values, and which serialize commands and events to <code>Json</code>.</p>
 <p>Since the type of a response can vary according to the type of specific request, multiplexed endpoints require that request types extend the <code>MuxRequest</code> type:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/algebras/algebra/src/test/scala/endpoints/algebra/MuxEndpointsDocs.scala#L11-L29" target="_blank" title="Go to snippet source"></a><code class="language-scala">val users: MuxEndpoint[Command, Event, Json] =
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/0.15.0/algebras/algebra/src/test/scala/endpoints/algebra/MuxEndpointsDocs.scala#L11-L29" target="_blank" title="Go to snippet source"></a><code class="language-scala">val users: MuxEndpoint[Command, Event, Json] =
   muxEndpoint[Command, Event, Json](
     post(path / &quot;users&quot;, jsonRequest[Json]),
     ok(jsonResponse[Json])
@@ -215,13 +215,13 @@ case class UserDeleted(id: Long) extends Event</code></pre>
 <p>Typically, client interpreters fix the <code>MuxEndpoint[Req, Resp, Transport]</code> type to be a function from <code>Req</code> to <code>Future[Req#Response]</code>, so that calling <code>users(CreateUser(&quot;Alice&quot;))</code> (statically) returns a <code>Future[CreatedUser]</code>, and calling <code>users(DeleteUser(42))</code> returns a <code>Future[DeletedUser]</code>.</p>
 </div>
 <div>
-<a href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/manual/src/paradox/algebras/mux-endpoints.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/julienrf/endpoints/tree/0.15.0/documentation/manual/src/paradox/algebras/mux-endpoints.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.15.0+13-a6a7451e+20200403-2052
+0.15.0
 </span>
 </div>
 </article>

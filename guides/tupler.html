@@ -180,7 +180,7 @@ julienrf/endpoints
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.15.0+13-a6a7451e+20200403-2052
+<i class="md-icon" title="Version">label_outline</i> 0.15.0
 </label>
 </li>
 </ul>
@@ -208,7 +208,7 @@ julienrf/endpoints
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
 <h1><a href="#tupler" name="tupler" class="anchor"><span class="anchor-link"></span></a><code>Tupler</code></h1>
-<p>This guide explains why we use implicit <a href="/endpoints/api/endpoints/Tupler.html"><code>Tupler</code></a> parameters in the signature of some algebra operations and how it works.</p>
+<p>This guide explains why we use implicit <a href="../api/endpoints/Tupler.html"><code>Tupler</code></a> parameters in the signature of some algebra operations and how it works.</p>
 <h2><a href="#motivation" name="motivation" class="anchor"><span class="anchor-link"></span></a>Motivation</h2>
 <p>As explained in the <a href="../design.html">design</a> page, to model a request that carries an information of type <code>A</code>, we use the type <code>Request[A]</code>. This type <code>A</code> is important because it represents what is needed by clients to build such a request and what is received by servers to process such a request. For instance, a request carrying a user id could be modeled as <code>Request[Long]</code>. Clients would have to supply a <code>Long</code> value in order to build such a request, and servers would decode a <code>Long</code> value. Tracking these types is important because it guarantees that requests and responses are well-formed.</p>
 <p>Now, suppose that we define a request that has an URL carrying a user id (of type <code>Long</code>), and an entity carrying an <code>UpdateUser</code> value (describing changes to apply to a user resource). Such a request would have type <code>Request[(Long, UpdateUser)]</code>.</p>
@@ -222,7 +222,7 @@ julienrf/endpoints
 <p>The goal of the <code>Tupler</code> type is to compute more useful tuple types by discarding the <code>Unit</code> parameters. For instance, it produces a <code>Request[Long]</code> instead of a <code>Request[(Long, Unit)]</code>. Additionally, nested tuples are flattened: <code>Request[((Long, Boolean), String)]</code> becomes <code>Request[(Long, Boolean, String)]</code>.</p>
 <h2><a href="#how-it-works" name="how-it-works" class="anchor"><span class="anchor-link"></span></a>How it works</h2>
 <p>The <code>Tupler[A, B]</code> type takes two type parameters <code>A</code> and <code>B</code> and defines an abstract type member <code>Out</code>. This <code>Out</code> type defines the “useful” form of tupling <code>A</code> and <code>B</code>.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/json-schema/json-schema/src/main/scala/endpoints/Tupler.scala#L33-L39" target="_blank" title="Go to snippet source"></a><code class="language-scala">trait Tupler[A, B] {
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/0.15.0/json-schema/json-schema/src/main/scala/endpoints/Tupler.scala#L33-L39" target="_blank" title="Go to snippet source"></a><code class="language-scala">trait Tupler[A, B] {
   type Out
 }</code></pre>
 <p>Algebra operations that want to tuple types <code>A</code> and <code>B</code> take as parameter an implicit <code>tupler: Tupler[A, B]</code> and return a <code>tupler.Out</code> instead of an <code>(A, B)</code>.</p>
@@ -236,13 +236,13 @@ julienrf/endpoints
 <p>When the operation that takes an implicit <code>Tupler</code> as parameter is called, appropriate instances of <code>Tupler</code> will compute the type of the resulting tuple, by discarding <code>Unit</code> types and flattening nested tuples.</p>
 </div>
 <div>
-<a href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/manual/src/paradox/guides/tupler.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/julienrf/endpoints/tree/0.15.0/documentation/manual/src/paradox/guides/tupler.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.15.0+13-a6a7451e+20200403-2052
+0.15.0
 </span>
 </div>
 </article>
