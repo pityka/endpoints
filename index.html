@@ -176,7 +176,7 @@ julienrf/endpoints
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.15.0
+<i class="md-icon" title="Version">label_outline</i> 0.15.0+13-a6a7451e+20200403-2052
 </label>
 </li>
 </ul>
@@ -211,15 +211,15 @@ julienrf/endpoints
   <li>errors are raised at <strong>compile-time</strong> if endpoints are invoked with incompatible parameters.</li>
 </ul>
 <p>Servers, clients and documentation are <em>all</em> derived from a <em>single</em> source of truth describing the underlying protocol details (e.g., which verb, path, query parameters, headers, authentication strategy, etc. to use). For instance, here is an endpoint for incrementing a counter. It uses the HTTP verb <code>POST</code>, the URL path <code>/increment</code>, a JSON request entity containing an <code>Increment</code> value, and it returns an empty response.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0/documentation/examples/quickstart/endpoints/src/main/scala/quickstart/CounterEndpoints.scala#L37-L41" target="_blank" title="Go to snippet source"></a><code class="language-scala">val increment: Endpoint[Increment, Unit] =
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/examples/quickstart/endpoints/src/main/scala/quickstart/CounterEndpoints.scala#L37-L41" target="_blank" title="Go to snippet source"></a><code class="language-scala">val increment: Endpoint[Increment, Unit] =
   endpoint(
     post(path / &quot;increment&quot;, jsonRequest[Increment]),
     ok(emptyResponse)
   )</code></pre>
 <p>From the client perspective, calling an HTTP endpoint is as simple as calling a function:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0/documentation/examples/quickstart/client/src/main/scala/quickstart/CounterClientFuture.scala#L13" target="_blank" title="Go to snippet source"></a><code class="language-scala">val eventuallyDone: Future[Unit] = increment(Increment(step = 42))</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/examples/quickstart/client/src/main/scala/quickstart/CounterClientFuture.scala#L13" target="_blank" title="Go to snippet source"></a><code class="language-scala">val eventuallyDone: Future[Unit] = increment(Increment(step = 42))</code></pre>
 <p>Conversely, from the server perspective implementing an HTTP endpoint is as simple as implementing a function:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0/documentation/examples/quickstart/server/src/main/scala/quickstart/CounterServer.scala#L29" target="_blank" title="Go to snippet source"></a><code class="language-scala">increment.implementedBy(inc =&gt; counter.single += inc.step)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/examples/quickstart/server/src/main/scala/quickstart/CounterServer.scala#L29" target="_blank" title="Go to snippet source"></a><code class="language-scala">increment.implementedBy(inc =&gt; counter.single += inc.step)</code></pre>
 <p>The <em>endpoints</em> library takes care of constructing the HTTP requests and responses and decoding the server responses or client requests into high-level data types according to the endpoint descriptions.</p>
 <p>In contrast with <a href="comparison.html">most other approaches</a>, <em>endpoints</em> is a pure, &ldquo;<em>vanilla</em>&rdquo;, Scala library. <strong>No code generation</strong>. <strong>No macros</strong>. <strong>IDE friendly</strong>. Endpoint descriptions are <strong>first-class Scala values</strong>, which can be reused, combined, and abstracted over.</p>
 <p>The library currently supports the following backends:</p>
@@ -238,7 +238,7 @@ julienrf/endpoints
 <ul>
   <li>Have a look at the <a href="quick-start.html">quick start</a> guide to understand  in a few minutes what the library does and how to setup a project ;</li>
   <li>Check out the <a href="use-cases.html">use cases</a> to know the typical problems that <em>endpoints</em> addresses ;</li>
-  <li>Browse the <a href="api/endpoints/index.html">API documentation</a> or the  <a href="https://github.com/julienrf/endpoints/tree/master/documentation/examples">samples</a> ;</li>
+  <li>Browse the <a href="/endpoints/api/endpoints/index.html">API documentation</a> or the  <a href="https://github.com/julienrf/endpoints/tree/master/documentation/examples">samples</a> ;</li>
   <li>Get in touch in the <a href="https://gitter.im/julienrf/endpoints">gitter room</a>.</li>
 </ul>
 <h2><a href="#contributing" name="contributing" class="anchor"><span class="anchor-link"></span></a>Contributing</h2>
@@ -247,13 +247,13 @@ julienrf/endpoints
 <p><a href="https://bestmile.com">Bestmile</a> supports engineering work on the project.</p>
 </div>
 <div>
-<a href="https://github.com/julienrf/endpoints/tree/v0.15.0/documentation/manual/src/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/manual/src/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.15.0
+0.15.0+13-a6a7451e+20200403-2052
 </span>
 </div>
 </article>

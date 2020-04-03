@@ -172,7 +172,7 @@ julienrf/endpoints
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.15.0
+<i class="md-icon" title="Version">label_outline</i> 0.15.0+13-a6a7451e+20200403-2052
 </label>
 </li>
 </ul>
@@ -184,24 +184,24 @@ julienrf/endpoints
 <div class="md-content__searchable">
 <h1><a href="#scalaj-http" name="scalaj-http" class="anchor"><span class="anchor-link"></span></a>scalaj-http</h1>
 <p>Client interpreter backed by <a href="https://github.com/scalaj/scalaj-http">scalaj-http</a>.</p>
-<pre class="prettyprint"><code class="language-scala">&quot;org.julienrf&quot; %% &quot;endpoints-scalaj-client&quot; % &quot;0.15.0&quot;
+<pre class="prettyprint"><code class="language-scala">&quot;org.julienrf&quot; %% &quot;endpoints-scalaj-client&quot; % &quot;0.15.0+13-a6a7451e+20200403-2052&quot;
 </code></pre>
-<p><a href="../api/endpoints/scalaj/client/index.html">API documentation</a></p>
+<p><a href="/endpoints/api/endpoints/scalaj/client/index.html">API documentation</a></p>
 <p>The <code>Endpoints</code> interpreter fixes the <code>Endpoint[A, B]</code> type to a type that provide methods to invoke the endpoint synchronously or asynchronously.</p>
 <p>Given the following endpoint definition:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0/algebras/algebra/src/test/scala/endpoints/algebra/EndpointsDocs.scala#L84-L85" target="_blank" title="Go to snippet source"></a><code class="language-scala">val someResource: Endpoint[Int, String] =
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/algebras/algebra/src/test/scala/endpoints/algebra/EndpointsDocs.scala#L84-L85" target="_blank" title="Go to snippet source"></a><code class="language-scala">val someResource: Endpoint[Int, String] =
   endpoint(get(path / &quot;some-resource&quot; / segment[Int]()), ok(textResponse))</code></pre>
 <p>It can be asynchronously invoked as follows:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0/scalaj/client/src/test/scala/endpoints/scalaj/client/EndpointsDocs.scala#L11" target="_blank" title="Go to snippet source"></a><code class="language-scala">val eventuallyString: Future[String] = someResource.callAsync(42)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/scalaj/client/src/test/scala/endpoints/scalaj/client/EndpointsDocs.scala#L11" target="_blank" title="Go to snippet source"></a><code class="language-scala">val eventuallyString: Future[String] = someResource.callAsync(42)</code></pre>
 </div>
 <div>
-<a href="https://github.com/julienrf/endpoints/tree/v0.15.0/documentation/manual/src/paradox/interpreters/scalaj-http.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/julienrf/endpoints/tree/v0.15.0+13-a6a7451e+20200403-2052/documentation/manual/src/paradox/interpreters/scalaj-http.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.15.0
+0.15.0+13-a6a7451e+20200403-2052
 </span>
 </div>
 </article>
