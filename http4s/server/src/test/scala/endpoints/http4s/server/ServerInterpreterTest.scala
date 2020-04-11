@@ -55,6 +55,7 @@ class ServerInterpreterTest
       runTests(port)
     } finally {
       fiber.cancel.unsafeRunSync()
+      Thread.sleep(100)
     }
   }
 
